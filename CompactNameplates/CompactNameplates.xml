@@ -1,0 +1,143 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Texture name="NameplateBackgroundTemplate" virtual="true">
+        <Color r="0" g="0" b="0" a="0.5"/>
+    </Texture>
+
+    <Frame name="NameplateAuraFrameTemplate" virtual="true">
+        <Size x="30" y="30"/>
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <!-- Aura icon -->
+                <Texture parentKey="icon"/>
+                <!-- Aura stack count -->
+                <FontString parentKey="count" inherits="NumberFontNormal">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="-2" y="2"/>
+					</Anchors>
+				</FontString>
+                <!-- Aura duration -->
+                <FontString parentKey="duration" inherits="GameFontNormalSmall" hidden="true">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="BOTTOM"/>
+					</Anchors>
+				</FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="NameplateFrameTemplate" virtual="true">
+        <Size x="180" y="18"/>
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+        <Frames>
+            <!-- Health bar -->
+            <StatusBar name="$parent.healthBar" parentKey="healthBar">
+				<Anchors>
+                    <Anchor point="TOPLEFT"/>
+                    <Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<BarTexture file="Interface\AddOns\CompactNameplates\Textures\StatusBar-Fill"/>
+                <!-- <BarColor r="0.34" g="1" b="0.2"/> TODO: Add custom bar colors -->
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <!-- Unit name -->
+                        <FontString parentKey="unitName" inherits="SystemFont_Shadow_Med1">
+                            <Anchors>
+                                <Anchor point="LEFT" x="5" y="0.5"/>
+                            </Anchors>
+                        </FontString>
+                        <!-- Unit level -->
+                        <FontString name="$parent.unitLevel" parentKey="unitLevel" inherits="GameFontNormal">
+                            <Anchors>
+                                <Anchor point="RIGHT" x="-5" y="0.5"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                    <Layer level="BACKGROUND">
+                        <!-- Health bar background -->
+                        <Texture inherits="NameplateBackgroundTemplate">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" x="-0.75" y="0.75"/>
+                                <Anchor point="BOTTOMRIGHT" x="0.75" y="-0.75"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+			</StatusBar>
+            <!-- Cast bar -->
+            <StatusBar parentKey="castBar" hidden="true">
+                <Size y="14"/>
+				<Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parent.healthBar" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="TOPRIGHT" relativeTo="$parent.healthBar" relativePoint="BOTTOMRIGHT"/>
+				</Anchors>
+				<BarTexture file="Interface\AddOns\CompactNameplates\Textures\StatusBar-Fill"/>
+                <BarColor r="1" g=".7" b="0"/>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <!-- Spell name -->
+                        <FontString parentKey="spellName" inherits="SystemFont_Shadow_Small">
+                            <Anchors>
+                                <Anchor point="LEFT" x="5" y="0.5"/>
+                            </Anchors>
+                        </FontString>
+                        <!-- Spell target -->
+                        <FontString parentKey="targetName" inherits="SystemFont_Shadow_Small">
+                            <Anchors>
+                                <Anchor point="RIGHT" x="-5" y="0.5"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                    <Layer level="ARTWORK">
+                        <!-- Spell icon -->
+                        <Texture name="$parent.spellIcon" parentKey="spellIcon">
+                            <Size x="32" y="32"/>
+                            <Anchors>
+                                <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT"/>
+                            </Anchors>
+                            <TexCoords left="0.08" right="0.92" top="0.08" bottom="0.92"/>
+                        </Texture>
+                    </Layer>
+                    <Layer level="BACKGROUND">
+                        <!-- Cast bar background -->
+                        <Texture inherits="NameplateBackgroundTemplate">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" x="-0.75" y="-0.75"/>
+                                <Anchor point="BOTTOMRIGHT" x="0.75" y="-0.75"/>
+                            </Anchors>
+                        </Texture>
+                        <!-- Spell icon background -->
+                        <Texture inherits="NameplateBackgroundTemplate">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="$parent.spellIcon" x="-0.75" y="0.75"/>
+                                <Anchor point="BOTTOMRIGHT" relativeTo="$parent.spellIcon" x="-0.75" y="-0.75"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+            </StatusBar>
+            <!-- Aura container -->
+            <Frame parentKey="auras">
+                <Size y="50"/>
+                <Anchors>
+                    <Anchor point="BOTTOM" relativePoint="TOP" y="4"/>
+                </Anchors>
+            </Frame>
+        </Frames>
+        <Layers>
+            <Layer level="ARTWORK">
+                <!-- Raid icon -->
+                <Texture parentKey="raidIcon" file="Interface\TargetingFrame\UI-RaidTargetingIcons" hidden="true">
+                    <Size x="40" y="40"/>
+                    <Anchors>
+                        <Anchor point="BOTTOM" relativePoint="TOP" y="4"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+    </Frame>
+</Ui>
